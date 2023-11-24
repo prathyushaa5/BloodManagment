@@ -1,0 +1,41 @@
+import tkinter as tk
+from tkinter import messagebox
+
+from login import *
+def blood_type():
+    def display_blood_type():
+      query = "SELECT * FROM Blood_Type"
+      cursor.execute(query)
+      results = cursor.fetchall()
+
+      display_text.delete(1.0, tk.END)  # Clear the current text
+      for result in results:
+        display_text.insert(tk.END, f"Blood_ID: {result[0]}\n")
+        display_text.insert(tk.END, f"Blood_Code: {result[1]}\n")
+        display_text.insert(tk.END, f"Donates_To: {result[2]}\n")
+        display_text.insert(tk.END, f"Receives_From: {result[3]}\n\n")
+    def next():
+     print()
+     root.destroy() 
+            
+
+   # Create the GUI window
+    root = tk.Tk()
+    root.title("Blood Type Display")
+
+   # Button for displaying Blood_Type
+    display_button = tk.Button(root, text="Display Blood Type", command=display_blood_type)
+    next_button=tk.Button(root,text="Next",command=next)
+
+   # Text widget to display results
+    display_text = tk.Text(root, height=10, width=40)
+
+
+   # Grid layout
+    display_button.grid(row=0, column=0, columnspan=2)
+    display_text.grid(row=1, column=0, columnspan=2)
+    next_button.grid(row=1,column=3,columnspan=2)
+
+# Main loop
+    root.mainloop()
+
